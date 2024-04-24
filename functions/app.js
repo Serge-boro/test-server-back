@@ -8,8 +8,8 @@ const path = require('path')
 
 const serverless = require('serverless-http')
 
-// const notFoundMiddleware = require('./middleware/not-found.js')
-// const errorHandlerMiddleware = require('./middleware/error-handler.js')
+const notFoundMiddleware = require('./middleware/not-found.js')
+const errorHandlerMiddleware = require('./middleware/error-handler.js')
 
 const app = express()
 
@@ -38,8 +38,10 @@ app.options('*', cors(corsConfig))
 
 app.use(cookieParser())
 
-// app.use(notFoundMiddleware)
-// app.use(errorHandlerMiddleware)
+app.use('/.netlify/functions/app', router)
+
+app.use(notFoundMiddleware)
+app.use(errorHandlerMiddleware)
 
 // app.get('*', (req, res) => {
 //   res.sendFile(path.resolve(__dirname, './build', 'index.html'))
@@ -61,5 +63,4 @@ const start = async () => {
 
 start()
 
-app.use('/.netlify/functions/app', router)
 module.exports.handler = serverless(app)
