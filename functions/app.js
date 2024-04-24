@@ -6,6 +6,8 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const path = require('path')
 
+const serverless = require('serverless-http')
+
 // const notFoundMiddleware = require('./middleware/not-found.js')
 // const errorHandlerMiddleware = require('./middleware/error-handler.js')
 
